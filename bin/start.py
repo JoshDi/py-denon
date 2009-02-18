@@ -8,7 +8,7 @@ def configure_server():
     denonweb.app().run()
 
 def configure_path():
-    sys.path.insert(0, 'F:\\code\\py-denon\\src')
+    sys.path.insert(0, '/Users/chenry/Desktop/denon/src')
 
 def redirect_output():
     f = open('./denon.log', 'w')
