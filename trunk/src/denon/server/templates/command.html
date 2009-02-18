@@ -3,5 +3,8 @@ $def with (command)
 	<input type="text" name="command" />
 	<input type="submit" value="send command" />
 </form>
-$if command:
-	Sent: $command
+$if command.get('command'):
+	Sent: $command['command']
+
+$if command.get('buffer'):
+	Received: $command['buffer']

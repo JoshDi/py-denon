@@ -14,7 +14,7 @@ d = commander()
 
 class Command:
     def GET(self):
-        return render.command(None)
+        return render.command({})
 
     def POST(self):
         x = web.input()
@@ -22,7 +22,8 @@ class Command:
             return False
         d.connect()
         d.sendCommand(x.command)
-        return render.command(x.command)
+        buffer = d.readBuffer()
+        return render.command({'command': x.command, 'buffer': buffer})
         
 class Main:
     def GET(self):
