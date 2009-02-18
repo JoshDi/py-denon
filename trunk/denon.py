@@ -9,8 +9,7 @@ except serial.serialutil.SerialException:
 	sys.exit(0)
 
 def sendCommand( serialConnection, passcommand ):
-	print passcommand
-	print serialConnection.write( passcommand )
+	serialConnection.write( passcommand )
 	print serialConnection.readline()
 	return
 
