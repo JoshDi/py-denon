@@ -6,21 +6,34 @@ class commander(object):
 
     """
     def __init__(self):
-        pass #for now
+        # @todo: move these settings to a configuration file
+        self.serialPort = '/dev/null'
+        self.baudRate = 9600
+        self.timeout = 1
+        self.__conn = None
 
-    def sendCommand(self, command, options={}):
+    def connect(self):
+        self.__conn = serial.Serial(self.serialPort, self.baudRate, timeout=self.timeout)
+        return self.__conn
+
+    def sendCommand(self, command, cr='\r', options={}):
         """ 
             handles passing commands to the serial port.
             @param command: rs232 command to send
-            @param options: dictionary of otional parameters
+            @param options: dictionary of optional parameters
             @return: boolean
         """
-        pass
+        if not self.__conn:
+            return False
+        self.__conn.write(command)
+        self.__conn.write(cr)
+        return True
 
-    def readBuffer(self, amount=None):
+    def readBuffer(self, amount=0):
         """
             handles reading the rs232 buffer
-            @param amount - how many chars to read from the buffer, default: None (all chars)
+            @param amount - how many chars to read from the buffer, default: 0 (all chars)
         """
-        pass
-
+        if not self.__conn:
+            return False
+        return self.__conn.readline()

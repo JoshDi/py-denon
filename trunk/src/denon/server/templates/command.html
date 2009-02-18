@@ -1,0 +1,7 @@
+$def with (command)
+<form action="/command/" method="post">
+	<input type="text" name="command" />
+	<input type="submit" value="send command" />
+</form>
+$if command:
+	Sent: $command
