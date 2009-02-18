@@ -3,6 +3,11 @@ import serial
 import sys
 from optparse import OptionParser
 
+def sendCommand( serialConnection, passcommand ):
+    serialConnection.write( passcommand )
+    print serialConnection.readline()
+    return
+
 if __name__ == '__main__':
     p = OptionParser()
     p.add_option("-c", "--command", dest="command", help="Denon Command to use", metavar="COMMAND")
@@ -12,7 +17,7 @@ if __name__ == '__main__':
     if options.port:
         dev = options.port
     else: 
-        dev = "/dev/tty.usbserial"
+        dev = "0"
 
     try:
         denSerial = serial.Serial('/dev/tty.usbserial', 9600, timeout=1)
@@ -30,7 +35,5 @@ if __name__ == '__main__':
     sys.exit(0)
 
 
-def sendCommand( serialConnection, passcommand ):
-	serialConnection.write( passcommand )
-	print serialConnection.readline()
-	return
+
+    
