@@ -14,7 +14,7 @@ d = commander()
 
 class Command:
     def GET(self):
-        return render.command()
+        return render.command(None)
 
     def POST(self):
         x = web.input()
@@ -23,7 +23,6 @@ class Command:
         d.sendCommand(x.command)
         return render.command(x.command)
         
-
 class Main:
     def GET(self):
         return sys.path
