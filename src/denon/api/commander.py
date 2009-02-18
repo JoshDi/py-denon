@@ -16,7 +16,7 @@ class commander(object):
         self.__conn = serial.Serial(self.serialPort, self.baudRate, timeout=self.timeout)
         return self.__conn
 
-    def sendCommand(self, command, cr='\r', options={}):
+    def sendCommand(self, command, cr=r'\r', options={}):
         """ 
             handles passing commands to the serial port.
             @param command: rs232 command to send
@@ -25,7 +25,7 @@ class commander(object):
         """
         if not self.__conn:
             return False
-        self.__conn.write(command)
+        self.__conn.write(str(command))
         self.__conn.write(cr)
         return True
 
