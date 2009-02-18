@@ -20,6 +20,7 @@ class Command:
         x = web.input()
         if not x.command:
             return False
+        d.connect()
         d.sendCommand(x.command)
         return render.command(x.command)
         
