@@ -13,8 +13,19 @@ class commander(object):
         self.__conn = None
 
     def connect(self):
-        self.__conn = serial.Serial(self.serialPort, self.baudRate, timeout=self.timeout)
-        return self.__conn
+        if not self.__conn or not self.__conn._isOpen:
+            try:
+                self.__conn = serial.Serial(self.serialPort, self.baudRate, timeout=self.timeout)
+            except:
+                return None            
+            return self.__conn
+        else:
+            return None
+        
+    def disconnect(self):
+        if self.__conn and self.__conn._isOpen:
+            self.__conn.close()
+        return True
 
     def sendCommand(self, command, cr='\r', options={}):
         """ 

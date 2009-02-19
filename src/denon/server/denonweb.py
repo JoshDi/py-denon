@@ -20,11 +20,15 @@ class Command:
         x = web.input()
         if not x.command:
             return False
-        d.connect()
-        d.sendCommand(x.command)
+        if d.connect():
+            d.sendCommand(x.command)
+        else:
+            return render.badConnection(d)
         buffer = d.readBuffer()
+        d.disconnect()
         return render.command({'command': x.command, 'buffer': buffer})
         
+         
 class Main:
     def GET(self):
         return sys.path
