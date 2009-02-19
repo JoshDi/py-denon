@@ -1,14 +1,14 @@
 $def with (command)
 
 $if command.get('command'):
-	Sent: $command['command']<br/>
+	<b>Sent:</b> $command['command']<br/>
 
 $if command.get('buffer'):
-	Received: $command['buffer']
+	<b>Received:</b> $command['buffer']
 $elif command.get('command') and not command.get('buffer'):
 	<b>Command not recognized</b>
 	
-	
+<hr>
 
 <h2>commands</h2>
 $if command.get('commands'):
