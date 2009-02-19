@@ -4,7 +4,21 @@ $def with (command)
 	<input type="submit" value="send command" />
 </form>
 $if command.get('command'):
-	Sent: $command['command']
+	Sent: $command['command']<br/>
 
 $if command.get('buffer'):
 	Received: $command['buffer']
+$elif command.get('command') and not command.get('buffer'):
+	<b>Command not recognized</b>
+	
+	
+
+<h2>commands</h2>
+$if command.get('commands'):
+	$for c in command['commands'].commands:
+		$c['code'] - $c['desc']<br/>
+
+<h2>parameters</h2>
+$if command.get('parameters'):
+	$for c in command['parameters'].parameters
+		$c['code'] - $c['type']<br/>
