@@ -1,6 +1,8 @@
 import web
 import sys, os
 from denon.api.commander import commander
+from denon.data.commands import commands
+from denon.data.commands import parameters
 
 urls = (
     '/command/', 'Command',
@@ -14,7 +16,7 @@ d = commander()
 
 class Command:
     def GET(self):
-        return render.command({})
+        return render.command({'commands': commands, 'parameters': parameters})
 
     def POST(self):
         x = web.input()
@@ -26,7 +28,7 @@ class Command:
             return render.badConnection(d)
         buffer = d.readBuffer()
         d.disconnect()
-        return render.command({'command': x.command, 'buffer': buffer})
+        return render.command({'command': x.command, 'buffer': buffer, 'commands': commands, 'parameters': parameters})
         
          
 class Main:
