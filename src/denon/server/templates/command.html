@@ -1,8 +1,5 @@
 $def with (command)
-<form action="/command/" method="post">
-	<input type="text" name="command" />
-	<input type="submit" value="send command" />
-</form>
+
 $if command.get('command'):
 	Sent: $command['command']<br/>
 
@@ -16,9 +13,9 @@ $elif command.get('command') and not command.get('buffer'):
 <h2>commands</h2>
 $if command.get('commands'):
 	$for c in command['commands'].commands:
-		$c['code'] - $c['desc']<br/>
+		<b>$c['code']</b> - $c['desc']<br/>
 
 <h2>parameters</h2>
 $if command.get('parameters'):
 	$for c in command['parameters'].parameters
-		$c['code'] - $c['type']<br/>
+		$c['code'] - Type: $c['type']<br/>

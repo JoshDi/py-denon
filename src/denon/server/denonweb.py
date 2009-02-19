@@ -33,7 +33,7 @@ class Command:
          
 class Main:
     def GET(self):
-        return sys.path
+        return render.status(d)
 
 def app():
     d = web.application(urls, globals())

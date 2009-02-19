@@ -7,6 +7,10 @@ $def with (content)
     </head>
     <body>
         <p><a href="/">status</a></p>
+		<form action="/command/" method="post">
+			<input type="text" name="command" />
+			<input type="submit" value="send command" />
+		</form>
 $:content
     </body>
 </html>
