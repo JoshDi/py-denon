@@ -5,6 +5,6 @@
     @param timeout: Serial Port timeout (default 1s)
 """
 
-serialPort = /dev/null
+serialPort = /dev/tty.usbserial
 baudRate = 9600
 timeout = 1
