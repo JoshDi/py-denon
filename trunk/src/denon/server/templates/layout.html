@@ -22,6 +22,7 @@ $def with (content)
 		<meta name="viewport" content="width=320" /> 
 		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.1/jquery.min.js"></script>
 		<script type="text/javascript">
+			var readBuffer = false;
 			function sendCommand(cmd){
 				var cmd;
 				\$('#command button').attr("disabled","disabled");	
@@ -29,7 +30,7 @@ $def with (content)
 					url: "/ajax/",
 					async: false,
 					processData: false,
-					data: 'command=' + cmd,
+					data: 'readbuffer=' + readBuffer + '&command=' + cmd,
 					dataType: 'json',
 					success: function(json){
 						var out = null;
