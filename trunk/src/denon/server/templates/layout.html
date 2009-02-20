@@ -23,6 +23,20 @@ $def with (content)
 		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.1/jquery.min.js"></script>
 		<script type="text/javascript">
 			var readBuffer = 0;
+
+			function toggleBuffer(bufferButton){
+				onTxt = "Read Buffer: ON";
+				offTxt = "Read Buffer: OFF";
+				if (readBuffer == 0){
+					readBuffer = 1;
+					\$(bufferButton).text(onTxt);
+				}else{
+					readBuffer = 0;
+					\$(bufferButton).text(offTxt);
+				}
+				return readBuffer
+			}
+
 			function sendCommand(cmd){
 				var cmd;
 				\$('#command button').attr("disabled","disabled");	
@@ -73,6 +87,7 @@ $def with (content)
 							<input type="text" name="command" id="cmd" value="MVUP" />
 							<small><button type="submit" id="cmdBtn"/>Send command</button></small>
 						</form>
+						<button onclick="toggleBuffer(this);">Read Buffer: Off</button>
 						<div id="output"></div>
 				</div></li>
 			</ul>
