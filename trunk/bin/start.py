@@ -8,7 +8,10 @@ def configure_server():
     denonweb.app().run()
 
 def configure_path():
-    sys.path.insert(0, '/Users/chenry/Desktop/py-denon/src')
+    base = os.path.dirname(__file__)
+    src = os.path.abspath(os.path.join(base, "..", "src"))
+    sys.path.insert(0, src)
+    print 'Path added: %s' % src
 
 def redirect_output():
     f = open('./denon.log', 'w')
@@ -18,6 +21,7 @@ def redirect_output():
 if __name__ == '__main__':
     import socket
 
+    #we'll redirect output to maintain background capabilities later...
     #redirect_output()
     configure_path()
     configure_server()
