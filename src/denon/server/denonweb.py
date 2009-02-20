@@ -39,6 +39,7 @@ class Main:
 class Ajax:
     def GET(self):
         x = web.input()
+        buffer = ''
         web.header("Content-Type", "application/json")
         if not x.command:
             return False
@@ -46,11 +47,11 @@ class Ajax:
             d.sendCommand(x.command)
         else:
             return "{'status': 'error', 'message': 'Couldn\\'t connect to serial port'}"
-        if x.get('readbuffer', 0):
-            buffer = d.readBuffer()
+        if x.readbuffer:
+            buffer = d.readBuffer().split('\r')
         else:
             buffer=''
-        return "{'status': 'success', 'buffer': %s}" % buffer.split('\r')
+        return "{'status': 'success', 'buffer': %s}" % buffer
 
 
 def app():
