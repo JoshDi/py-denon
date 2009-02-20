@@ -47,7 +47,7 @@ class Ajax:
             d.sendCommand(x.command)
         else:
             return "{'status': 'error', 'message': 'Couldn\\'t connect to serial port'}"
-        if x.readbuffer:
+        if int(x.readbuffer):
             buffer = d.readBuffer().split('\r')
         else:
             buffer=''
