@@ -31,7 +31,6 @@ $def with (content)
 					success: function(json){
 						var out = null;
 
-						console.log(json);
 						if(json['status'] != 'success'){
 							\$('#output').html('<b>Error:</b> ' + json['message']);
 							return false;
