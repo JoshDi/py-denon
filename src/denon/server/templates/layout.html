@@ -18,17 +18,58 @@ $def with (content)
 		</style>
 		<meta name="viewport" content="width=320" /> 
 		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.1/jquery.min.js"></script>
+		<script type="text/javascript">
+			function sendCommand(cmd){
+				var cmd;
+				\$('#cmdBtn').attr("disabled","disabled");
+;
+				 \$.ajax({
+					url: "/ajax/",
+					async: false,
+					processData: false,
+					dataType: 'json',
+					data: 'command=' + cmd,
+					success: function(j){
+						\$('#cmdBtn').attr("disabled","");
+						var out = null;
+						if(j['status'] != 'success'){
+							return false;
+						}
+						
+						out = "Command sent: " + cmd;
+						for (buf in j['buffer']){
+							out += " " + j['buffer'][buf];
+						}
+
+						\$('#output').text(out);
+						
+;
+					}
+
+				 });
+
+			}
+		</script>
     </head>
     <body>
 		<div id="iphone">
 			<ul class="nav">
 				<li><a href="/">Status</a></li>
 				<li><a href="javascript:void(0);" onclick="\$('#command').slideToggle(200);">Command</a>
-				<div class="content hidden" id="command">
-					<form action="/command/" method="post">
-						<input type="text" name="command" />
-						<input type="submit" value="send command" />
-					</form>
+				<div class="content" id="command">
+						<button onclick="sendCommand('PWON');">Power On</button>
+						<button onclick="sendCommand('PWSTANDBY');">Power Off</button>
+						<button onclick="sendCommand('MUON');">Mute</button>
+						<button onclick="sendCommand('MVUP');">VOL UP</button>
+						<button onclick="sendCommand('MVDOWN');">VOL DOWN</button>
+						<hr>
+						<button onclick="sendCommand('SICD');">CD</button>
+						<button onclick="sendCommand('SIATUNER');">TUNER</button>
+						<form onsubmit="sendCommand(\$('#cmd').val());return false;">
+							<input type="text" name="command" id="cmd" value="MVUP" />
+							<input type="submit" id="cmdBtn" value="Send command"/>
+						</form>
+						<div id="output"></div>
 				</div></li>
 			</ul>
 <div id="pageContent">

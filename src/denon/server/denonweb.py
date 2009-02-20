@@ -6,6 +6,7 @@ from denon.data.commands import parameters
 
 urls = (
     '/command/', 'Command',
+    '/ajax/', 'Ajax',
     '/', 'Main',
 )
 
@@ -34,6 +35,20 @@ class Command:
 class Main:
     def GET(self):
         return render.status(d)
+
+class Ajax:
+    def GET(self):
+        x = web.input()
+        if not x.command:
+            return False
+        if d.connect():
+            d.sendCommand(x.command)
+        else:
+            return render.badConnection(d)
+        #buffer = d.readBuffer()
+        buffer=''
+        return "{'status': 'success', 'buffer': %s}" % buffer.split('\r')
+
 
 def app():
     d = web.application(urls, globals())

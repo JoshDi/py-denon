@@ -19,6 +19,8 @@ class commander(object):
             except:
                 return None            
             return self.__conn
+        if self.__conn._isOpen:
+            return self.__conn
         else:
             return None
         
@@ -34,6 +36,7 @@ class commander(object):
             @param options: dictionary of optional parameters
             @return: boolean
         """
+        self.__conn.flushInput()
         if not self.__conn:
             return False
         self.__conn.write(str(command))
@@ -47,4 +50,10 @@ class commander(object):
         """
         if not self.__conn:
             return False
-        return self.__conn.readline()
+        if amount:
+            return self.__conn.read(amount)
+        else:
+            return self.__conn.readline()
+
+    def getConn():
+        return self.__conn
