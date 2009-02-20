@@ -14,40 +14,43 @@ $def with (content)
 			.hidden{display:none;}
 			h1{font-size: 16px;}
 			h2{font-size: 14px;}
-
+			button{border: 1px solid #ddd; background: #e5e5e5;font-family: verdana, tahoma;margin: 2px;}
 		</style>
 		<meta name="viewport" content="width=320" /> 
 		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.1/jquery.min.js"></script>
 		<script type="text/javascript">
 			function sendCommand(cmd){
 				var cmd;
-				\$('#cmdBtn').attr("disabled","disabled");
-;
+				\$('#command button').attr("disabled","disabled");	
 				 \$.ajax({
 					url: "/ajax/",
 					async: false,
 					processData: false,
-					dataType: 'json',
 					data: 'command=' + cmd,
-					success: function(j){
-						\$('#cmdBtn').attr("disabled","");
+					dataType: 'json',
+					success: function(json){
 						var out = null;
-						if(j['status'] != 'success'){
+
+						console.log(json);
+						if(json['status'] != 'success'){
+							\$('#output').html('<b>Error:</b> ' + json['message']);
 							return false;
 						}
-						
+					
 						out = "Command sent: " + cmd;
-						for (buf in j['buffer']){
-							out += " " + j['buffer'][buf];
+						for (buf in json['buffer']){
+							out += " " + json['buffer'][buf];
 						}
 
 						\$('#output').text(out);
-						
-;
+						return true;
+					},
+					error: function(e, f){
+						return false;
 					}
 
 				 });
-
+				\$('#command button').attr("disabled","");
 			}
 		</script>
     </head>
@@ -62,7 +65,7 @@ $def with (content)
 						<button onclick="sendCommand('MUON');">Mute</button>
 						<button onclick="sendCommand('MVUP');">VOL UP</button>
 						<button onclick="sendCommand('MVDOWN');">VOL DOWN</button>
-						<hr>
+						<hr />
 						<button onclick="sendCommand('SICD');">CD</button>
 						<button onclick="sendCommand('SIATUNER');">TUNER</button>
 						<form onsubmit="sendCommand(\$('#cmd').val());return false;">
