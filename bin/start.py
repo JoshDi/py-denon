@@ -21,7 +21,6 @@ def redirect_output():
 if __name__ == '__main__':
     import socket
 
-    #we'll redirect output to maintain background capabilities later...
-    #redirect_output()
+    redirect_output()
     configure_path()
     configure_server()
