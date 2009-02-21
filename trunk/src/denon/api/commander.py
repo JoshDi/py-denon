@@ -29,18 +29,19 @@ class commander(object):
             self.__conn.close()
         return True
 
-    def sendCommand(self, command, cr='\r', options={}):
+    def sendCommand(self, commands, cr='\r', options={}):
         """ 
             handles passing commands to the serial port.
-            @param command: rs232 command to send
+            @param commands: list of rs232 commands to send
             @param options: dictionary of optional parameters
             @return: boolean
         """
         self.__conn.flushInput()
         if not self.__conn:
             return False
-        self.__conn.write(str(command))
-        self.__conn.write(cr)
+        for c in commands:
+            self.__conn.write(str(c))
+            self.__conn.write(cr)
         return True
 
     def readBuffer(self, amount=0):
