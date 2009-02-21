@@ -17,14 +17,16 @@ $def with (content)
 			button{border: 1px solid #017CB1; background: #184bc8; color: #01adf7; font-family: verdana, tahoma;margin: 2px;padding: 10px;font-size: 12px;}
 			input {background: #01adf7; color: #184bc8;border: #01adf7}
 			.content, #pageContent {background: #184bc8;color: #01adf7;}
+
 			small button{padding: 2px;}
 		</style>
 		<meta name="viewport" content="width=320" /> 
 		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.1/jquery.min.js"></script>
 		<script type="text/javascript">
 			var readBuffer = 0;
+			var bufferButton = '#bufferButton';
 
-			function toggleBuffer(bufferButton){
+			function toggleBuffer(){
 				onTxt = "Read Buffer: ON";
 				offTxt = "Read Buffer: OFF";
 				if (readBuffer == 0){
@@ -33,6 +35,19 @@ $def with (content)
 				}else{
 					readBuffer = 0;
 					\$(bufferButton).text(offTxt);
+				}
+				return readBuffer
+			}
+
+			function switchBuffer(onOff){
+				onTxt = "Read Buffer: ON";
+				offTxt = "Read Buffer: OFF";
+				if (onOff == 0){
+					readBuffer = 0;
+					\$(bufferButton).text(offTxt);
+				}else{
+					readBuffer = 1;
+					\$(bufferButton).text(onTxt);
 				}
 				return readBuffer
 			}
@@ -73,6 +88,12 @@ $def with (content)
     <body>
 		<div id="iphone">
 			<ul class="nav">
+				<li><a href="javascript:void(0);" onclick="\$('#status').slideToggle(200);">Status</a>
+					<div class="content hidden" id="status">
+						<button onclick="switchBuffer(1);sendCommand('PW?\rMV?\rSI\r');">Get status</button>
+					</div>
+				
+				</li>
 				<li><a href="javascript:void(0);" onclick="\$('#command').slideToggle(200);">Command</a>
 				<div class="content" id="command">
 						<button onclick="sendCommand('PWON');">Power On</button>
@@ -87,10 +108,12 @@ $def with (content)
 							<input type="text" name="command" id="cmd" value="MVUP" />
 							<small><button type="submit" id="cmdBtn"/>Send command</button></small>
 						</form>
-						<button onclick="toggleBuffer(this);">Read Buffer: Off</button>
+						<button onclick="toggleBuffer();" id="bufferButton">Read Buffer: Off</button>
 						<div id="output"></div>
 				</div></li>
 			</ul>
+			<div id="output"></div>
+
 <div id="pageContent">
 $:content
 </div>
