@@ -43,8 +43,11 @@ class Ajax:
         web.header("Content-Type", "application/json")
         if not x.command:
             return False
+        else:
+            commands = x.command.split(',')
         if d.connect():
-            d.sendCommand(x.command)
+            for c in commands:
+                d.sendCommand(c)
         else:
             return "{'status': 'error', 'message': 'Couldn\\'t connect to serial port'}"
         if int(x.readbuffer):
