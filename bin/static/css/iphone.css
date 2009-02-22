@@ -1,0 +1,13 @@
+body{margin:0;padding:0;}
+#iphone{width: 320px;-webkit-text-size-adjust:none;font-family: verdana,tahoma; font-size: 11px;min-height: 480px;background: #849AB3; }
+#pageContent{padding: 5px;}
+ul{list-style:none;margin:0;padding:0;}
+#accordion a{font-size: 16px;background: #849AB3;border-bottom: 1px solid #666C8C;border-top: 1px solid #F5F8FE;padding: 18px 0 18px 10px;font-weight:bold;display:block;text-decoration:none;color:white;}
+#accordion div div.content{padding: 5px;}
+.hidden{display:none;}
+h1{font-size: 16px;}
+h2{font-size: 14px;}
+button{border: 1px solid #017CB1; background: #0F307D; color: #01adf7; font-family: verdana, tahoma;margin: 2px;padding: 10px;font-size: 12px;}
+input {background: #01adf7; color: #0F307D;border: #01adf7}
+.content, #pageContent {color: #01adf7;background: #0F307D;}
+small button{padding: 2px;}
