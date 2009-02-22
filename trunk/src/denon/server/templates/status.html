@@ -1,7 +1,11 @@
-$def with (d)
-<h1>Status</h1>
+<%inherit file="/ui/layout/iphone/layout.mako" />
 
-<h2>port configuration:</h2>
-serial port: $d.serialPort<br/>
-rate: $d.baudRate<br/>
-timeout: $d.timeout<br/>
+<%include file="/ui/layout/iphone/tabs.mako"/>
+
+<%def name="title()">
+	status :: py-denon console
+</%def>
+
+<%def name="docready()">
+	$("#accordion").accordion();
+</%def>

@@ -1,8 +1,8 @@
-import web
-import sys, os
+import web, sys, os
 from denon.api.commander import commander
 from denon.data.commands import commands
 from denon.data.commands import parameters
+from web.contrib.template import render_mako
 
 urls = (
     '/command/', 'Command',
@@ -12,7 +12,14 @@ urls = (
 
 app = web.application(urls, globals())
 templatesDir = os.path.join(os.path.dirname(__file__), "templates")
-render = web.template.render(templatesDir, base="layout")
+# render = web.template.render(templatesDir, base="layout")
+# Use mako templates instead of webpy builtin.
+render = render_mako(
+        directories=[templatesDir],
+        input_encoding='utf-8',
+        output_encoding='utf-8',
+        )
+
 d = commander()
 
 class Command:
@@ -34,7 +41,7 @@ class Command:
          
 class Main:
     def GET(self):
-        return render.status(d)
+        return render.status(d=d)
 
 class Ajax:
     def GET(self):
