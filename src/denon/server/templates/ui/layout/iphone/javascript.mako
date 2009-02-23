@@ -49,6 +49,9 @@
                 }
             
                 out = "Command sent: " + cmd;
+                if(readBuffer){
+                    out += "<br/>Received: ";
+                }
                 for (buf in json['buffer']){
                     out += " " + json['buffer'][buf];
                 }
