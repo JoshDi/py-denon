@@ -56,7 +56,7 @@
                     out += " " + json['buffer'][buf];
                 }
 
-                $(outDiv).text(out);
+                $(outDiv).html(out);
                 return true;
             },
             error: function(e, f){
