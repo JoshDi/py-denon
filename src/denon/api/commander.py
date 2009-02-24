@@ -9,7 +9,7 @@ class commander(object):
         # @todo: move these settings to a configuration file.
         self.serialPort = '/dev/tty.usbserial'
         self.baudRate = 9600
-        self.timeout = 1
+        self.timeout = 0
         self.__conn = None
 
     def connect(self):
