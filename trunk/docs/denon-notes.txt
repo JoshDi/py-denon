@@ -1,0 +1,7 @@
+Notes:
+serial = serial.Serial(3) # this opens com2 in windows.
+
+serial = serial.Serial('/dev/tty.usbserial','baud', timeout=1) # opens /dev/tty.usbserial serial port in unix
+
+
+Integer parameters (ie: CVFL 50, MV80)
