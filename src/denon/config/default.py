@@ -1,10 +1,23 @@
-"""
-    Serial Connection Configuration Settings
-    @param serialPort: Serial port device used to connect (default /dev/null)
-    @param baudRate: Baud Rate used to communicate (default 9600 baud)
-    @param timeout: Serial Port timeout (default 1s)
-"""
+import os as _os
+import logging as _logging
+import datetime as _datetime
 
-serialPort = /dev/tty.usbserial
+# server settings
+serverAddress = "0.0.0.0"
+
+# serial settings
+serialPort = 'COM1'
 baudRate = 9600
 timeout = 1
+
+# log settings
+logLevel = _logging.DEBUG
+logDirectory = "c:\\"
+logFilename = "%s\\denon-%s-%d.txt" % (logDirectory, _datetime.datetime.now().strftime("%Y%m%d%H%M%S"), _os.getpid())
+logEmail = True
+logEmailLevel = _logging.CRITICAL
+logEmailHost = "localhost"
+logEmailFrom = "email@host.com"
+logEmailTo = "email@host.com"
+
+print 'here we go...'

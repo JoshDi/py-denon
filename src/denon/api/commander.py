@@ -1,4 +1,5 @@
 import serial
+from denon.config import default as conf
 
 class commander(object):
     """
@@ -7,9 +8,9 @@ class commander(object):
     """
     def __init__(self):
         # @todo: move these settings to a configuration file.
-        self.serialPort = 'COM1'
-        self.baudRate = 9600
-        self.timeout = 1
+        self.serialPort = conf.serialPort
+        self.baudRate = conf.baudRate
+        self.timeout = conf.timeout
         self.__conn = None
 
     def connect(self):
@@ -52,11 +53,14 @@ class commander(object):
             self.__conn.write(cr)
         return True
 
-    def readBuffer(self, amount=0):
+    def readBuffer(self, amount=0, offline=False):
         """
             Handles reading the rs232 buffer.
             @param amount - how many chars to read from the buffer, default: 0 (all chars).
+            @param offline - for testing while not connected to serial a serial device.
         """
+        if offline:
+            return "offline output..."
         if not self.__conn:
             return False
         if amount:

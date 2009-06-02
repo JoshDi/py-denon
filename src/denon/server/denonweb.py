@@ -19,29 +19,13 @@ render = render_mako(
         input_encoding='utf-8',
         output_encoding='utf-8',
         )
-
 d = commander()
-
-class Command:
-    def GET(self):
-        return render.command({'commands': commands, 'parameters': parameters})
-
-    def POST(self):
-        x = web.input()
-        if not x.command:
-            return False
-        if d.connect():
-            d.sendCommand(x.command)
-        else:
-            return render.badConnection(d)
-        buffer = d.readBuffer()
-        d.disconnect()
-        return render.command({'command': x.command, 'buffer': buffer, 'commands': commands, 'parameters': parameters})
-        
          
 class Main:
     def GET(self):
-        return render.status(d=d)
+        x = commander()
+        return render.status(d=d, x=x)
+
 
 class Ajax:
     def GET(self):

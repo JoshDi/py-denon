@@ -11,18 +11,25 @@
             <button onclick="sendCommand('SIATUNER', '#commandOutput');">TUNER</button>
             <button onclick="toggleBuffer();" id="bufferButton">Read Buffer: Off</button>
             <hr />
-            <form onsubmit="sendCommand($('#cmd').val());return false;">
+            <form onsubmit="sendCommand($('#cmd').val(), '#commandOutput');return false;">
                 <input type="text" name="command" id="cmd" value="MVUP" />
                 <small><button type="submit" id="cmdBtn"/>Send command</button></small>
             </form>
             <div id="commandOutput"></div>
+	    <hr>
     </div>
     <div>
         <a href="#">Status</a>
         <div class="content" id="status">
             <button onclick="tmpBuffer = readBuffer;switchBuffer(1);sendCommand('PW?,MV?,SI?', '#statusOutput');switchBuffer(readBuffer);">Get status</button>
-            <div id="statusOutput">
+	    <div id="statusOutput" style="float:right;">
             </div>
+	    <br style="clear=both;" />
+	    Serial Port: ${ d.serialPort }<br/>
+	    Baud Rate ${ d.baudRate }<br/>
+	    timeout ${ d.timeout }<br/>
+
+            
         </div>
     </div>
     <div>
