@@ -53,8 +53,7 @@ class Ajax:
         else:
             commands = x.command.split(',')
         if d.connect():
-            for c in commands:
-                d.sendCommand(c)
+            d.sendCommand(commands)
         else:
             return "{'status': 'error', 'message': 'Couldn\\'t connect to serial port'}"
         if int(x.readbuffer):
