@@ -2,7 +2,7 @@ import os
 import sys
 
 def configure_server():
-    import logging
+    from denon.config import default as conf
     from denon.server import denonweb
 
     denonweb.app().run()
