@@ -20,7 +20,7 @@ if __name__ == '__main__':
         dev = "0"
 
     try:
-        denSerial = serial.Serial(COM3, 9600, timeout=1)
+        denSerial = serial.Serial(COM1, 9600, timeout=1)
     except serial.serialutil.SerialException:
         print 'Error cannot open Serial Connection.'
         sys.exit(0)
